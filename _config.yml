@@ -1,0 +1,42 @@
+# Build settings
+markdown:            kramdown
+highlighter:         rouge
+permalink:           none
+plugins:             [jekyll-paginate, jekyll-sitemap, jekyll-feed, jekyll-seo-tag]
+
+sass:
+  sass_dir: assets/css
+  style: :compressed
+
+# Site settings
+author:            "LDK PR Review Club contributors"
+coordinator:       "LDK contributor [ariard](https://github.com/ariard)"
+coordinator_irc:   "ariard"
+description:       "A fortnightly review club for LDK PRs"
+meeting_day:       "Tuesday"
+meeting_location:  'the #review-club channel on <a href="https://discord.gg/5AcknnMfBw">our Discord server</a>'
+meeting_time:      "18:00 UTC"
+title:             "LDK PR Review Club"
+twitter:
+  card:            summary
+  username:        lightningdevkit
+twitter_username:  lightningdevkit
+url:               "https://ldk.reviews"
+
+# Exclude from processing
+exclude:
+   - Gemfile
+   - Gemfile.lock
+   - Makefile
+   - README.md
+   - Rakefile
+   - test/
+
+defaults:
+  - scope:
+      path: ""  ## all pages
+    values:
+      image: /assets/img/twitter_card.png
+
+permalink: :title
+

@@ -1,0 +1,23 @@
+*.swp
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+._*
+.bundle
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+Icon?
+Thumbs.db
+_cache
+_site/
+ehthumbs.db
+vendor
+
+# Vim Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
