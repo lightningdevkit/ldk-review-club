@@ -35,7 +35,4 @@ there's no need to ask permission. If the question is off-topic, the host will k
 let you know. The host will end the session at the end of the hour. Thanking the host
 at the end of the meeting is always appreciated!
 
-Follow the [PR Review Club on Twitter](https://twitter.com/BitcoinCorePRs) for
-announcements on that week’s PR or schedule changes.
-
-**We look forward to having you at the next PR Review Club!**
+**We look forward to having you at the next LDK PR Review Club!**
