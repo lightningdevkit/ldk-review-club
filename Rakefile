@@ -58,7 +58,7 @@ COMPONENTS = DESIRED_COMPONENTS.map(&:downcase).freeze
 # Characters or words we want removed after the prefix can go into this array.
 UNDESIRED_PR_TITLE_WORDS = %w(- _).freeze
 
-GITHUB_API_URL = 'https://api.github.com/repos/bitcoin/bitcoin/pulls'
+GITHUB_API_URL = 'https://api.github.com/repos/lightningdevkit/rust-lightning/pulls'
 HTTP_SUCCESS  = '200'
 HTTP_NOTFOUND = '404'
 HTTP_ERRORS = [
@@ -198,7 +198,7 @@ def create_post_file!(filename, response, date, host)
     line.puts "<!-- TODO: Before meeting, add notes and questions"
     line.puts "## Notes\n\n"
     line.puts "## Questions"
-    line.puts "1. Did you review the PR? [Concept ACK, approach ACK, tested ACK, or NACK](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review)?"
+    line.puts "1. Did you review the PR? [Concept ACK, approach ACK, tested ACK, or NACK](https://github.com/lightningdevkit/rust-lightning/blob/master/CONTRIBUTING.md#peer-review)?"
     line.puts "-->\n\n\n"
     line.puts "-->"
   end
