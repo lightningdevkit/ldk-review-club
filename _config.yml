@@ -10,8 +10,8 @@ sass:
 
 # Site settings
 author:            "LDK PR Review Club contributors"
-coordinator:       "LDK contributor [ariard](https://github.com/ariard)"
-coordinator_irc:   "ariard"
+coordinator:       "LDK contributor [dunxen](https://github.com/dunxen)"
+coordinator_irc:   "dunxen"
 description:       "A fortnightly review club for LDK PRs"
 meeting_day:       "Tuesday"
 meeting_location:  'the #review-club channel on <a href="https://discord.gg/5AcknnMfBw">our Discord server</a>'
