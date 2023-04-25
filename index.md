@@ -5,7 +5,7 @@ title: home
 ### A fortnightly review club for Lightning Dev Kit (LDK) PRs
 
 <span class="question">What is this?</span> &nbsp;A fortnightly club for reviewing
-LDK PRs at **{{ site.meeting_time }} every second {{ site.meeting_day }}** in
+LDK PRs at **{{ site.meeting_time }} usually every second {{ site.meeting_day }}** in
 {{ site.meeting_location }}.
 
 <span class="question">What's it for?</span> &nbsp;To help newer contributors
