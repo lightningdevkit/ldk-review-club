@@ -93,8 +93,8 @@ namespace :posts do
 
     # Set default value for meeting date if not supplied by user.
     unless date
-      date = next_wednesday.to_s
-      puts "Date set to next Wednesday: #{date}"
+      date = next_friday.to_s
+      puts "Date set to next Friday: #{date}"
     end
 
     # Ensure meeting date is valid.
@@ -156,8 +156,8 @@ def valid_iso8601_date?(date_string)
     yyyy >= Date.today.year && Date.valid_date?(yyyy, mm, dd)
 end
 
-def next_wednesday(date = Date.today, wednesday = 3)
-  date + ((wednesday - date.wday) % 7)
+def next_friday(date = Date.today, friday = 5)
+  date + ((friday - date.wday) % 7)
 end
 
 def parse_response(http, pr)
