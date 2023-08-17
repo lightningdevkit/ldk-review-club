@@ -91,7 +91,7 @@ rake posts:new -- -p PR_NUMBER -h HOST_USERNAME -d YYYY-MM-DD
 
 The `-p` (`pr`)  and `-h` (`host`) arguments are required. The `-d` (`date`)
 argument is optional; if no date is passed the meeting date will be set by default
-to next Tuesday.
+to next Friday.
 
 The `host` argument is your GitHub username.
 
