@@ -16,6 +16,26 @@ the site locally. Ruby 3.0 is recommended. Once they are set up:
 In case of any issues, don't hesitate to run the following to update rubygems,
 bundler, and dependencies: `gem update --system && gem update && bundle update`
 
+## Cloudflare Pages Deployment
+
+This site can be deployed to [Cloudflare Pages](https://pages.cloudflare.com/)
+via GitHub Actions. The workflow in
+`.github/workflows/deploy-cloudflare-pages.yml` builds the Jekyll site and
+uploads it to Cloudflare Pages on every push to `main`.
+
+### Prerequisites
+
+1. Create a Cloudflare Pages project named `ldk-review-club` (or update the
+   `projectName` field in the workflow to match your project name).
+2. Create a Cloudflare API token with the **Cloudflare Pages — Edit** permission.
+3. Add the following repository secrets
+   (Settings → Secrets and variables → Actions):
+   - `CLOUDFLARE_API_TOKEN` — your Cloudflare API token
+   - `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID
+
+Once configured, every push to `main` triggers a deployment. You can also
+trigger a deployment manually from the Actions tab (`workflow_dispatch`).
+
 ## Making a new post
 
 See the [hosting.md](hosting.md) doc for how to create a post for an upcoming meeting.
