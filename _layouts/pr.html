@@ -56,10 +56,12 @@ main_class: main--wide
 <a href="{{ page.link }}" target="_blank" rel="noopener" class="btn" style="margin-top:24px">VIEW LINK <span>↗</span></a>
 {% endif %}
 
-{% if page.status == "past" and page.commit %}
+{% if page.commit %}
+  {% if page.status == "past" or page.status == "done" %}
 <p class="note" style="margin-top:20px">
   The PR branch HEAD was <a href="https://github.com/lightningdevkit/rust-lightning/tree/pr{{ page.id | remove_first: '/#' }}/">{{ page.commit }}</a> at the time of this review club meeting.
 </p>
+  {% endif %}
 {% endif %}
 
 <div class="post-content">

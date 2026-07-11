@@ -42,7 +42,7 @@ title: home
 <div class="meeting-list">
 {% assign count = 0 %}
 {% for post in site.posts %}
-  {% if post.status == "past" %}
+  {% if post.status == "past" or post.status == "done" %}
     {% assign count = count | plus: 1 %}
     {% include redesign/meeting-row.html post=post %}
   {% endif %}
