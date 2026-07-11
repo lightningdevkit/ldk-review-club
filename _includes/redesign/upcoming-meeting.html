@@ -1,0 +1,26 @@
+{% assign upcoming_found = false %}
+{% for post in site.posts reversed %}
+  {% if post.status == "upcoming" and upcoming_found == false %}
+    {% assign upcoming_found = true %}
+    <a href="{{ post.url | relative_url }}" class="meeting-card">
+      <div class="meeting-card__header">
+        <span class="meeting-card__date">{{ post.date | date: "%d %b %Y" | upcase }}</span>
+        <span class="meeting-card__host">hosted by {{ post.host }}</span>
+        <span class="meeting-card__cta">NOTES &amp; QUESTIONS →</span>
+      </div>
+      <div class="meeting-card__title">
+        {% if post.pr %}<span class="meeting-card__pr">#{{ post.pr }}</span> — {% endif %}{{ post.title }}
+      </div>
+      {% if post.components.size > 0 %}
+      <div class="tags" style="margin-top:16px">
+        {% for comp in post.components %}
+        <span class="tag">{{ comp | downcase }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
+  {% endif %}
+{% endfor %}
+{% unless upcoming_found %}
+<p class="note">No upcoming meetings scheduled yet. Suggest a PR in the Discord channel.</p>
+{% endunless %}
