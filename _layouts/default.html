@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 {% include head.html %}
-
-<body>
-
-  <input id="color-mode" type="checkbox" name="color-mode" onclick='save()'>
-  <label id="color-mode-switch" for="color-mode">💡</label>
-
-  <div class="site-container">
-    <div class="page-content">
-      {% include header.html %}
+<body class="redesign{% if site.redesign_reduced_motion %} redesign--reduced-motion{% endif %}">
+  {% include redesign/marquee.html %}
+  <div class="shell">
+    {% include redesign/sidebar.html %}
+    <main class="main{% if page.main_class %} {{ page.main_class }}{% endif %}">
+      {% if site.redesign_rfc %}
+      <div class="rfc-banner">
+        <strong>RFC preview.</strong> This branch proposes a visual redesign of ldk.reviews.
+        Feedback welcome on <a href="https://github.com/lightningdevkit/ldk-review-club">GitHub</a>
+        or in <a href="https://discord.gg/5AcknnMfBw">#review-club</a>.
+        See <a href="{{ '/docs/rfc/001-site-redesign/' | relative_url }}">RFC 001</a> for details.
+      </div>
+      {% endif %}
       {{ content }}
-      {% include footer.html %}
-    <div>
-  <div>
-
+    </main>
+  </div>
 </body>
-
-<script>
-  function save() {
-    const dark = document.getElementById('color-mode').checked;
-    window.localStorage.setItem('dark', String(dark));
-  }
-
-  const dark = window.localStorage.getItem('dark') === "true";
-  document.getElementById('color-mode').checked = dark;
-</script>
-
 </html>

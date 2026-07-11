@@ -2,102 +2,84 @@
 layout: default
 title: home
 ---
-### A fortnightly review club for Lightning Dev Kit (LDK) PRs
 
-<span class="question">What is this?</span> &nbsp;A fortnightly club for reviewing
-LDK PRs at **{{ site.meeting_time }} every second {{ site.meeting_day }}** in
-{{ site.meeting_location }}.
+{% include redesign/hero.html %}
 
-<span class="question">What's it for?</span> &nbsp;To help newer contributors
-learn about the LDK review process. The review club is *not* primarily
-intended to help open PRs get merged.
+<h1 class="h-display h-display--xl">OPEN CODE.<br>OPEN REVIEW.</h1>
+<p class="lead">A fortnightly club for reviewing Lightning Dev Kit (LDK) PRs — <strong style="color:#ECECF1">{{ site.meeting_time }} every second {{ site.meeting_day }}</strong> in {{ site.meeting_location }}.</p>
 
-<span class="question">Who should take part?</span> &nbsp;Anyone who wants to
-learn about contributing to LDK. All are welcome to come and ask
-questions!
+<div class="btn-row">
+  <a href="https://discord.gg/5AcknnMfBw" target="_blank" rel="noopener" class="btn">JOIN THE DISCORD <span>→</span></a>
+  <a href="{{ '/your-first-meeting/' | relative_url }}" class="btn">YOUR FIRST MEETING <span>→</span></a>
+  <a href="{{ '/meetings/' | relative_url }}" class="btn">ALL MEETINGS <span>→</span></a>
+</div>
 
-<span class="question">How do I take part?</span> Just show up on our Discord!
-See [Attending your first PR Review Club](/your-first-meeting/) for more tips
-on how to participate.
+<div class="info-grid">
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHAT IS THIS?</div>
+    <div class="info-grid__text">A fortnightly club for reviewing LDK PRs, together, in public.</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHAT'S IT FOR?</div>
+    <div class="info-grid__text">Helping newer contributors learn the LDK review process. It's <em>not</em> primarily intended to help open PRs get merged.</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHO SHOULD TAKE PART?</div>
+    <div class="info-grid__text">Anyone who wants to learn about contributing to LDK. All are welcome to come and ask questions!</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHO RUNS THIS?</div>
+    <div class="info-grid__text">Meetings are scheduled by {{ site.coordinator }}. The meetings are hosted by a variety of LDK contributors.</div>
+  </div>
+</div>
 
-<span class="question">Who runs this?</span> &nbsp;Upcoming meetings are
-scheduled by {{ site.coordinator }}.
-The meetings are hosted by a variety of LDK contributors. See
-some of our [previous hosts](/meetings-hosts/).
-
-## Upcoming Meetings
-
-<table>
+<h2 class="h-section">&gt; UPCOMING MEETING</h2>
+{% assign upcoming_found = false %}
 {% for post in site.posts reversed %}
-  {% capture components %}
-  {%- for comp in post.components -%}
-    <a href="/meetings-components/#{{comp}}">{{comp}}</a>{% unless forloop.last %}, {% endunless %}
-  {%- endfor -%}
-  {% endcapture %}
-  {% if post.status == "upcoming" %}
-    <tr>
-      <div class="home-posts-post">
-        <td class="Home-posts-post-date">{{ post.date | date_to_string }}</td>
-        <td class="Home-posts-post-arrow">&raquo;</td>
-        <td><a class="Home-posts-post-title" href="{{ post.url }}">{% if post.pr %}#{{ post.pr }} {% endif %} {{ post.title }}</a>
-        ({{components}})
-        <span class="host">hosted by
-        <a class="host" href="/meetings-hosts/#{{post.host}}">{{ post.host }}</a>
-        </span></td>
+  {% if post.status == "upcoming" and upcoming_found == false %}
+    {% assign upcoming_found = true %}
+    {% capture components %}
+    {%- for comp in post.components -%}
+    <span class="tag">{{ comp | downcase }}</span>
+    {%- endfor -%}
+    {% endcapture %}
+    <a href="{{ post.url | relative_url }}" class="meeting-card">
+      <div class="meeting-card__header">
+        <span class="meeting-card__date">{{ post.date | date: "%d %b %Y" | upcase }}</span>
+        <span class="meeting-card__host">hosted by {{ post.host }}</span>
+        <span class="meeting-card__cta">NOTES &amp; QUESTIONS →</span>
       </div>
-    </tr>
-  {%- endif -%}
+      <div class="meeting-card__title">
+        {% if post.pr %}<span class="meeting-card__pr">#{{ post.pr }}</span> — {% endif %}{{ post.title }}
+      </div>
+      <div class="tags" style="margin-top:16px">{{ components }}</div>
+    </a>
+  {% endif %}
 {% endfor %}
-</table>
+{% unless upcoming_found %}
+<p class="note">No upcoming meetings scheduled yet. Suggest a PR in the Discord channel.</p>
+{% endunless %}
 
-We're always looking for interesting PRs to discuss in the review club and for
-volunteer hosts to lead the discussion:
+<p class="note">We're always looking for interesting PRs and volunteer hosts — suggest a PR in the Discord channel, or read the <a href="{{ '/hosting/' | relative_url }}">information for meeting hosts</a> and contact {{ site.coordinator_irc }} on Discord.</p>
 
-- If there's a PR that you'd like to discuss in a future meeting, feel free to suggest it in the Discord channel.
-- If you'd like to host a meeting, look at the [information for meeting
-  hosts](/hosting) and contact {{ site.coordinator_irc }} on Discord.
-
-## Recent Meetings
-
-<table>
+<h2 class="h-section">&gt; RECENT MEETINGS</h2>
+<div class="meeting-list">
 {% assign count = 0 %}
 {% for post in site.posts %}
-  {% capture components %}
-  {%- for comp in post.components -%}
-    <a href="/meetings-components/#{{comp}}">{{comp}}</a>{% unless forloop.last %}, {% endunless %}
-  {%- endfor -%}
-  {% endcapture %}
   {% if post.status == "past" %}
     {% assign count = count | plus: 1 %}
-    <tr>
-      <div class="home-posts-post">
-        <td class="Home-posts-post-date">{{ post.date | date_to_string }}</td>
-        <td class="Home-posts-post-arrow">&raquo;</td>
-        <td><a class="Home-posts-post-title" href="{{ post.url }}">{% if post.pr %}#{{ post.pr }}{% endif %} {{ post.title }}</a>
-        ({{components}})
-        <span class="host">hosted by <a class="host" href="/meetings-hosts/#{{post.host}}">{{ post.host }}</a></span></td>
-      </div>
-    </tr>
-  {%- endif -%}
+    {% include redesign/meeting-row.html post=post %}
+  {% endif %}
   {% if count == 4 %}
     {% break %}
   {% endif %}
 {% endfor %}
-</table>
+</div>
+<a href="{{ '/meetings/' | relative_url }}" class="btn btn--ghost">SEE ALL MEETINGS <span>→</span></a>
 
-See all [meetings](/meetings/).
-
-## Other Resources for New Contributors
-
-- Read the [Contributing to LDK
-  Guide](https://github.com/lightningdevkit/rust-lightning/blob/main/CONTRIBUTING.md). This
-  will help you understand the process and some of the terminology we use in
-  LDK.
-- Look at the [Good First
-  Issues](https://github.com/lightningdevkit/rust-lightning/issues?q=is%3aissue+is%3aopen+label%3a%22good+first+issue%22)
-  and [Up For
-  Grabs](https://github.com/lightningdevkit/rust-lightning/issues?utf8=%e2%9c%93&q=label%3a%22up+for+grabs%22)
-  list.
-- Brush up on your Rust. There are [many references
-  available](https://github.com/rust-unofficial/awesome-rust#resources) over and above [The Book](https://doc.rust-lang.org/book/).
-
+<h2 class="h-section">&gt; RESOURCES FOR NEW CONTRIBUTORS</h2>
+<div class="resource-list">
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Read the <a href="https://github.com/lightningdevkit/rust-lightning/blob/main/CONTRIBUTING.md">Contributing to LDK Guide</a> to understand the process and terminology used in LDK.</span></div>
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Look at the <a href="https://github.com/lightningdevkit/rust-lightning/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Good First Issues</a> and <a href="https://github.com/lightningdevkit/rust-lightning/issues?q=label%3A%22up+for+grabs%22">Up For Grabs</a> lists.</span></div>
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Brush up on your Rust — there are <a href="https://github.com/rust-unofficial/awesome-rust#resources">many references available</a> over and above <a href="https://doc.rust-lang.org/book/">The Book</a>.</span></div>
+</div>

@@ -1,0 +1,15 @@
+{% assign meeting = include.post %}
+{% capture components %}
+{%- for comp in meeting.components -%}
+{{ comp | downcase }}{% unless forloop.last %} · {% endunless %}
+{%- endfor -%}
+{% endcapture %}
+<a href="{{ meeting.url | relative_url }}" class="meeting-list__row">
+  <span class="meeting-list__date">{{ meeting.date | date: "%d %b %Y" }}</span>
+  <span>
+    <span class="meeting-list__title">
+      {% if meeting.pr %}<span class="meeting-list__pr">#{{ meeting.pr }}</span> {% endif %}{{ meeting.title }}
+    </span>
+    <span class="meeting-list__meta">{{ components }} — hosted by {{ meeting.host }}</span>
+  </span>
+</a>

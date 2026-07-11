@@ -1,0 +1,38 @@
+{% assign active_nav = 'home' %}
+{% if page.layout == 'pr' or page.url contains '/meetings' %}
+  {% assign active_nav = 'meetings' %}
+{% elsif page.url contains 'code-of-conduct' %}
+  {% assign active_nav = 'conduct' %}
+{% elsif page.url contains 'hosting' %}
+  {% assign active_nav = 'hosting' %}
+{% endif %}
+
+<aside class="sidebar">
+  <svg class="sidebar__logo" width="38" height="53" viewBox="0 0 100 140" aria-hidden="true"><polygon points="58,4 20,78 44,78 36,136 82,56 54,56" fill="#FFD60A"></polygon></svg>
+  <a href="{{ '/' | relative_url }}" class="sidebar__title">LDK<br>REVIEW<br>CLUB<span class="sidebar__cursor">_</span></a>
+
+  <nav class="sidebar__nav" aria-label="Primary">
+    <a href="{{ '/' | relative_url }}" class="sidebar__nav-link">
+      <span class="sidebar__nav-mark">{% if active_nav == 'home' %}&gt;{% endif %}</span>
+      <span class="sidebar__nav-label{% if active_nav == 'home' %} sidebar__nav-label--active{% endif %}">HOME</span>
+    </a>
+    <a href="{{ '/meetings/' | relative_url }}" class="sidebar__nav-link">
+      <span class="sidebar__nav-mark">{% if active_nav == 'meetings' %}&gt;{% endif %}</span>
+      <span class="sidebar__nav-label{% if active_nav == 'meetings' %} sidebar__nav-label--active{% endif %}">MEETINGS</span>
+    </a>
+    <a href="{{ '/code-of-conduct/' | relative_url }}" class="sidebar__nav-link">
+      <span class="sidebar__nav-mark">{% if active_nav == 'conduct' %}&gt;{% endif %}</span>
+      <span class="sidebar__nav-label{% if active_nav == 'conduct' %} sidebar__nav-label--active{% endif %}">CODE OF CONDUCT</span>
+    </a>
+    <a href="{{ '/hosting/' | relative_url }}" class="sidebar__nav-link">
+      <span class="sidebar__nav-mark">{% if active_nav == 'hosting' %}&gt;{% endif %}</span>
+      <span class="sidebar__nav-label{% if active_nav == 'hosting' %} sidebar__nav-label--active{% endif %}">HOSTING</span>
+    </a>
+  </nav>
+
+  <div class="sidebar__links">
+    <a href="https://discord.gg/5AcknnMfBw" target="_blank" rel="noopener" class="sidebar__ext-link">discord ↗</a>
+    <a href="https://github.com/lightningdevkit/rust-lightning" target="_blank" rel="noopener" class="sidebar__ext-link">github ↗</a>
+    <a href="https://lightningdevkit.org" target="_blank" rel="noopener" class="sidebar__ext-link">lightningdevkit.org ↗</a>
+  </div>
+</aside>

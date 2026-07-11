@@ -1,0 +1,28 @@
+{% assign path = page.path | remove: '.html' | remove: '.md' %}
+<nav class="meetings-nav" aria-label="Meeting indexes">
+  {% if path == 'meetings' %}
+    <span class="meetings-nav__active">&gt; BY DATE</span>
+  {% else %}
+    <a href="{{ '/meetings/' | relative_url }}" class="meetings-nav__link">BY DATE</a>
+  {% endif %}
+  {% if path == 'meetings-prs' %}
+    <span class="meetings-nav__active">&gt; BY PR</span>
+  {% else %}
+    <a href="{{ '/meetings-prs/' | relative_url }}" class="meetings-nav__link">BY PR ↗</a>
+  {% endif %}
+  {% if path == 'meetings-components' %}
+    <span class="meetings-nav__active">&gt; BY COMPONENT</span>
+  {% else %}
+    <a href="{{ '/meetings-components/' | relative_url }}" class="meetings-nav__link">BY COMPONENT ↗</a>
+  {% endif %}
+  {% if path == 'meetings-hosts' %}
+    <span class="meetings-nav__active">&gt; BY HOST</span>
+  {% else %}
+    <a href="{{ '/meetings-hosts/' | relative_url }}" class="meetings-nav__link">BY HOST ↗</a>
+  {% endif %}
+  {% if path == 'meetings-authors' %}
+    <span class="meetings-nav__active">&gt; BY AUTHOR</span>
+  {% else %}
+    <a href="{{ '/meetings-authors/' | relative_url }}" class="meetings-nav__link">BY AUTHOR ↗</a>
+  {% endif %}
+</nav>

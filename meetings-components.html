@@ -19,37 +19,18 @@ permalink: /meetings-components/
 
 {% assign components = raw_components | split: "|" | sort_natural | uniq %}
 
-<div class="Home">
-  <h2 class="Home-posts-title">Meetings</h2>
-  <p>{% include linkers/meetings-pages.md %}</p>
+<h1 class="h-display h-display--lg">MEETINGS</h1>
+{% include redesign/meetings-nav.html %}
 
-  {% for component in components %}
-    <div id="{{component}}">
-      <h3 class="meetings-index-section">{{component}}</h3>
-      <table style="padding-left: 1.5em">
-        {% for post in site.posts %}
-          {% if post.components contains component %}
-            <div class="Home-posts-post">
-              <tr>
-                <td class="Home-posts-post-date">
-                  {{ post.date | date_to_string }}
-                </td>
-                <td class="Home-posts-post-arrow">
-                  &raquo;
-                </td>
-                <td>
-                  <a class="Home-posts-post-title" href="{{ post.url }}">{% if post.pr %}#{{ post.pr }} {% endif %}{{ post.title }}</a>
-                  <span class="host">
-                    hosted by
-                    <a class="host" href="/meetings-hosts/#{{post.host}}">{{ post.host }}</a>
-                  </span>
-                </td>
-              </tr>
-            </div>
-          {%- endif -%}
-        {% endfor %}
-      </table>
+{% for component in components %}
+  <div class="meetings-group" id="{{ component }}">
+    <div class="meetings-group__label">{{ component }}</div>
+    <div class="meeting-list">
+      {% for post in site.posts %}
+        {% if post.components contains component %}
+          {% include redesign/meeting-row.html post=post %}
+        {% endif %}
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
-<br>
+  </div>
+{% endfor %}

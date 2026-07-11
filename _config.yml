@@ -23,6 +23,10 @@ twitter:
 twitter_username:  lightningdevkit
 url:               "https://ldk.reviews"
 
+# RFC 001: visual redesign preview flags (remove when merged)
+redesign_rfc: true
+redesign_reduced_motion: false
+
 # Exclude from processing
 exclude:
    - Gemfile

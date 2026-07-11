@@ -1,0 +1,740 @@
+// LDK Review Club — visual redesign (RFC)
+
+$bg: #0A0A0E
+$surface: #0F0F16
+$surface-hover: #13131D
+$border: #1B1B24
+$border-code: #23232E
+$accent: #FFD60A
+$text: #ECECF1
+$text-muted: #C9C9D4
+$text-dim: #8E8EA0
+$purple: #6B6BD6
+$green: #7BE07B
+$red: #FF6B6B
+
+$font-display: 'Silkscreen', monospace
+$font-mono: 'Space Mono', monospace
+
+@keyframes ticker
+  from
+    transform: translateX(0)
+  to
+    transform: translateX(-50%)
+
+@keyframes blink
+  0%, 49%
+    opacity: 1
+  50%, 100%
+    opacity: 0
+
+@keyframes pfloat
+  from
+    transform: translateY(0)
+  to
+    transform: translateY(-16px)
+
+@keyframes boltglow
+  from
+    filter: drop-shadow(0 0 18px rgba(255, 214, 10, .45))
+  to
+    filter: drop-shadow(0 0 34px rgba(255, 214, 10, .8))
+
+*, *::before, *::after
+  box-sizing: border-box
+
+html
+  height: 100%
+
+body
+  margin: 0
+  background: $bg
+  color: $text
+  font-family: $font-mono
+  min-height: 100%
+
+::selection
+  background: $accent
+  color: $bg
+
+a
+  color: $accent
+  &:hover
+    color: $text
+
+.redesign
+  min-height: 100vh
+  background: $bg
+  color: $text
+  font-family: $font-mono
+
+  &--reduced-motion
+    .marquee__track
+      animation-play-state: paused !important
+    .hero__bolt,
+    .hero__particle
+      animation: none !important
+
+@media (prefers-reduced-motion: reduce)
+  .redesign
+    .marquee__track
+      animation-play-state: paused !important
+    .hero__bolt,
+    .hero__particle,
+    .sidebar__cursor
+      animation: none !important
+
+// Marquee
+.marquee
+  position: sticky
+  top: 0
+  z-index: 50
+  background: $accent
+  overflow: hidden
+  height: 34px
+  display: flex
+  align-items: center
+
+.marquee__track
+  display: flex
+  white-space: nowrap
+  animation: ticker 46s linear infinite
+
+.marquee__text
+  font-family: $font-display
+  font-size: 11px
+  letter-spacing: 2px
+  color: $bg
+  padding-right: 8px
+
+// Shell
+.shell
+  display: flex
+  align-items: flex-start
+
+.sidebar
+  position: sticky
+  top: 34px
+  flex: none
+  width: 230px
+  height: calc(100vh - 34px)
+  padding: 44px 28px 32px 36px
+  display: flex
+  flex-direction: column
+  border-right: 1px solid $border
+
+.sidebar__logo
+  filter: drop-shadow(0 0 10px rgba(255, 214, 10, .55))
+
+.sidebar__title
+  font-family: $font-display
+  font-weight: 700
+  font-size: 15px
+  line-height: 1.5
+  letter-spacing: 1px
+  color: $accent
+  margin: 14px 0 0
+  text-decoration: none
+
+.sidebar__cursor
+  animation: blink 1.1s steps(1) infinite
+
+.sidebar__nav
+  display: flex
+  flex-direction: column
+  gap: 15px
+  margin: 52px 0 0
+
+.sidebar__nav-link
+  cursor: pointer
+  display: flex
+  gap: 8px
+  font-family: $font-display
+  font-size: 11px
+  letter-spacing: 1.5px
+  text-decoration: none
+  &:hover
+    opacity: .8
+
+.sidebar__nav-mark
+  color: $accent
+  width: 12px
+  flex: none
+
+.sidebar__nav-label
+  color: $text-dim
+  &--active
+    color: $accent
+
+.sidebar__links
+  margin-top: auto
+  display: flex
+  flex-direction: column
+  gap: 8px
+  font-size: 12px
+
+.sidebar__ext-link
+  color: $text-dim
+  text-decoration: none
+  &:hover
+    color: $accent
+
+.main
+  flex: 1
+  min-width: 0
+  padding: 52px 64px 96px
+  max-width: 920px
+
+.main--wide
+  max-width: 760px
+
+// Typography
+.h-display
+  font-family: $font-display
+  font-weight: 700
+  letter-spacing: 2px
+  color: $accent
+  margin: 0
+
+.h-display--xl
+  font-size: 46px
+  line-height: 1.2
+  margin-top: 44px
+
+.h-display--lg
+  font-size: 34px
+  line-height: 1.3
+  margin-top: 8px
+
+.h-display--md
+  font-size: 28px
+  letter-spacing: 1px
+  line-height: 1.4
+
+.h-section
+  font-family: $font-display
+  font-size: 17px
+  letter-spacing: 2px
+  color: $text
+  margin: 72px 0 20px
+
+.h-section--sm
+  font-size: 15px
+  margin: 56px 0 20px
+
+.h-section--xs
+  font-size: 12px
+  color: $accent
+  margin: 44px 0 16px
+
+.lead
+  font-size: 15px
+  line-height: 1.75
+  color: $text-muted
+  max-width: 640px
+  margin: 24px 0 0
+
+// Hero
+.hero
+  position: relative
+  overflow: hidden
+  background: radial-gradient(120% 130% at 50% 125%, #191930 0%, #10101C 45%, $bg 100%)
+  border: 1px solid $border
+  height: 360px
+  display: flex
+  align-items: center
+  justify-content: center
+
+.hero__particle
+  position: absolute
+  animation: pfloat 3.2s ease-in-out infinite alternate
+
+.hero__bolt
+  animation: boltglow 2.6s ease-in-out infinite alternate
+
+// Buttons
+.btn-row
+  display: flex
+  flex-wrap: wrap
+  gap: 14px
+  margin: 32px 0 0
+
+.btn
+  display: inline-flex
+  align-items: center
+  gap: 10px
+  border: 1px solid $text
+  padding: 13px 20px
+  font-family: $font-display
+  font-size: 10px
+  letter-spacing: 1.5px
+  color: $text
+  text-decoration: none
+  cursor: pointer
+  background: transparent
+  &:hover
+    border-color: $accent
+    color: $accent
+
+.btn--accent
+  border-color: $accent
+  color: $accent
+  &:hover
+    background: $accent
+    color: $bg
+
+.btn--ghost
+  margin: 20px 0 0
+  color: $accent
+  border: none
+  padding: 0
+  &:hover
+    color: $text
+
+// Info grid
+.info-grid
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 1px
+  background: $border
+  border: 1px solid $border
+  margin: 72px 0 0
+
+.info-grid__cell
+  background: $surface
+  padding: 26px 28px
+
+.info-grid__label
+  font-family: $font-display
+  font-size: 10px
+  letter-spacing: 1.5px
+  color: $accent
+  margin: 0 0 12px
+
+.info-grid__text
+  font-size: 14px
+  line-height: 1.7
+  color: $text-muted
+
+// Tags
+.tags
+  display: flex
+  flex-wrap: wrap
+  gap: 8px
+
+.tag
+  font-size: 11px
+  border: 1px solid rgba(255, 214, 10, .4)
+  color: $accent
+  padding: 3px 9px
+  text-decoration: none
+  text-transform: lowercase
+  &:hover
+    border-color: $accent
+
+// Meeting cards
+.meeting-card
+  display: block
+  border: 1px solid rgba(255, 214, 10, .55)
+  background: linear-gradient(180deg, rgba(255, 214, 10, .06), rgba(255, 214, 10, 0))
+  padding: 28px 30px
+  text-decoration: none
+  cursor: pointer
+  &:hover
+    border-color: $accent
+
+.meeting-card__header
+  display: flex
+  align-items: baseline
+  gap: 16px
+  flex-wrap: wrap
+
+.meeting-card__date
+  font-family: $font-display
+  font-size: 11px
+  letter-spacing: 1.5px
+  color: $accent
+
+.meeting-card__host
+  font-size: 12px
+  color: $text-dim
+
+.meeting-card__cta
+  margin-left: auto
+  font-family: $font-display
+  font-size: 9px
+  letter-spacing: 1.5px
+  color: $text-dim
+
+.meeting-card__title
+  font-size: 19px
+  font-weight: 700
+  color: $text
+  line-height: 1.5
+  margin: 12px 0 0
+
+.meeting-card__pr
+  color: $accent
+
+// Meeting list
+.meeting-list
+  display: flex
+  flex-direction: column
+  gap: 1px
+  background: $border
+  border: 1px solid $border
+
+.meeting-list__row
+  display: grid
+  grid-template-columns: 110px 1fr
+  gap: 18px
+  background: $surface
+  padding: 18px 24px
+  text-decoration: none
+  align-items: baseline
+  &:hover
+    background: $surface-hover
+
+.meeting-list__date
+  font-size: 12px
+  color: $text-dim
+
+.meeting-list__title
+  display: block
+  font-size: 14px
+  font-weight: 700
+  color: $text
+  line-height: 1.55
+
+.meeting-list__pr
+  color: $accent
+
+.meeting-list__meta
+  display: block
+  font-size: 11.5px
+  color: $text-dim
+  margin-top: 5px
+
+// Meetings index
+.meetings-nav
+  display: flex
+  flex-wrap: wrap
+  gap: 22px
+  margin: 28px 0 52px
+  font-family: $font-display
+  font-size: 10px
+  letter-spacing: 1.5px
+
+.meetings-nav__active
+  color: $accent
+
+.meetings-nav__link
+  color: $text-dim
+  text-decoration: none
+  &:hover
+    color: $text
+
+.meetings-group
+  margin: 0 0 40px
+
+.meetings-group__label
+  font-family: $font-display
+  font-size: 12px
+  letter-spacing: 2px
+  color: $accent
+  margin: 0 0 14px
+
+// PR detail
+.back-link
+  display: inline-flex
+  align-items: center
+  gap: 10px
+  font-family: $font-display
+  font-size: 10px
+  letter-spacing: 1.5px
+  color: $text-dim
+  text-decoration: none
+  margin: 0 0 36px
+  &:hover
+    color: $accent
+
+.meta-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(140px, auto))
+  justify-content: start
+  gap: 1px
+  background: $border
+  border: 1px solid $border
+  margin: 32px 0 0
+
+.meta-grid__cell
+  background: $surface
+  padding: 16px 22px
+
+.meta-grid__label
+  font-family: $font-display
+  font-size: 9px
+  letter-spacing: 1.5px
+  color: $text-dim
+  margin: 0 0 8px
+
+.meta-grid__value
+  font-size: 13px
+  color: $text
+
+// Question list
+.question-list
+  display: flex
+  flex-direction: column
+  gap: 1px
+  background: $border
+  border: 1px solid $border
+
+.question-list__item
+  display: flex
+  gap: 18px
+  background: $surface
+  padding: 18px 24px
+  font-size: 14px
+  line-height: 1.75
+  color: $text-muted
+
+.question-list__num
+  color: $accent
+  font-family: $font-display
+  font-size: 12px
+  flex: none
+  padding-top: 2px
+
+// CTA banner
+.cta-banner
+  border: 1px solid rgba(255, 214, 10, .55)
+  background: linear-gradient(180deg, rgba(255, 214, 10, .06), rgba(255, 214, 10, 0))
+  padding: 26px 30px
+  margin: 56px 0 0
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 24px
+  flex-wrap: wrap
+
+.cta-banner__text
+  font-size: 14px
+  line-height: 1.7
+  color: $text-muted
+
+// Prose (static pages)
+.prose
+  max-width: 720px
+
+  h1
+    font-family: $font-display
+    font-weight: 700
+    font-size: 34px
+    line-height: 1.3
+    letter-spacing: 2px
+    color: $accent
+    margin: 8px 0 0
+
+  h2, h3, h4
+    font-family: $font-display
+    font-size: 15px
+    letter-spacing: 2px
+    color: $text
+    margin: 56px 0 20px
+
+  h3, h4
+    font-size: 12px
+    color: $accent
+    margin: 44px 0 16px
+
+  p
+    font-size: 15px
+    line-height: 1.8
+    color: $text-muted
+    margin: 28px 0 0
+
+  ul, ol
+    display: flex
+    flex-direction: column
+    gap: 14px
+    font-size: 14px
+    line-height: 1.8
+    color: $text-muted
+    padding: 0
+    margin: 16px 0 0
+    list-style: none
+
+  li
+    display: flex
+    gap: 12px
+    &::before
+      color: $accent
+      flex: none
+      content: '+'
+
+  li:has(a[href="#harassment"])
+    &::before
+      color: $text-dim
+      content: '-'
+
+  ol
+    counter-reset: prose-step
+    li
+      counter-increment: prose-step
+      gap: 14px
+      &::before
+        content: counter(prose-step, decimal-leading-zero)
+        font-family: $font-display
+        font-size: 12px
+        color: $accent
+        padding-top: 2px
+
+  code
+    color: $accent
+
+  pre
+    background: $surface
+    border: 1px solid $border-code
+    padding: 16px 20px
+    font-family: $font-mono
+    font-size: 13px
+    color: $accent
+    overflow-x: auto
+    margin: 0
+
+  pre code
+    color: inherit
+
+  .diff-add
+    color: $green
+
+  .diff-remove
+    color: $red
+
+// Post content
+.post-content
+  max-width: 760px
+
+  h2
+    font-family: $font-display
+    font-size: 15px
+    letter-spacing: 2px
+    color: $text
+    margin: 56px 0 20px
+
+  p
+    font-size: 15px
+    line-height: 1.8
+    color: $text-muted
+    margin: 0
+
+  code
+    color: $accent
+
+  ol
+    display: flex
+    flex-direction: column
+    gap: 1px
+    background: $border
+    border: 1px solid $border
+    padding: 0
+    margin: 0
+    list-style: none
+
+  ol > li
+    display: flex
+    gap: 18px
+    background: $surface
+    padding: 18px 24px
+    font-size: 14px
+    line-height: 1.75
+    color: $text-muted
+    counter-increment: question
+    &::before
+      content: counter(question, decimal-leading-zero)
+      color: $accent
+      font-family: $font-display
+      font-size: 12px
+      flex: none
+      padding-top: 2px
+
+  ol
+    counter-reset: question
+
+// Resources list
+.resource-list
+  display: flex
+  flex-direction: column
+  gap: 14px
+  max-width: 680px
+
+.resource-list__item
+  display: flex
+  gap: 12px
+  font-size: 14px
+  line-height: 1.7
+  color: $text-muted
+
+.resource-list__mark
+  color: $accent
+  flex: none
+
+// Note text
+.note
+  font-size: 13px
+  line-height: 1.8
+  color: $text-dim
+  max-width: 660px
+  margin: 20px 0 0
+
+// RFC banner
+.rfc-banner
+  background: rgba(255, 214, 10, .08)
+  border: 1px solid rgba(255, 214, 10, .35)
+  padding: 14px 18px
+  margin: 0 0 32px
+  font-size: 12px
+  line-height: 1.6
+  color: $text-muted
+
+  a
+    color: $accent
+
+// Responsive
+@media (max-width: 900px)
+  .shell
+    flex-direction: column
+
+  .sidebar
+    position: relative
+    top: 0
+    width: 100%
+    height: auto
+    padding: 24px 28px
+    border-right: none
+    border-bottom: 1px solid $border
+
+  .sidebar__nav
+    margin: 28px 0 0
+    flex-direction: row
+    flex-wrap: wrap
+    gap: 18px
+
+  .sidebar__links
+    margin-top: 24px
+    flex-direction: row
+    flex-wrap: wrap
+    gap: 16px
+
+  .main
+    padding: 32px 24px 64px
+
+  .info-grid
+    grid-template-columns: 1fr
+
+  .h-display--xl
+    font-size: 32px
+
+  .hero
+    height: 260px
