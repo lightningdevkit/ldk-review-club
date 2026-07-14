@@ -3,6 +3,7 @@ markdown:            kramdown
 highlighter:         rouge
 permalink:           none
 plugins:             [jekyll-paginate, jekyll-sitemap, jekyll-feed, jekyll-seo-tag]
+future:              true
 
 sass:
   sass_dir: assets/css
