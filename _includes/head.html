@@ -1,5 +1,4 @@
 <head>
-
   <title>
     {% if page.title == "home" %}
       {{ site.data.settings.title }}
@@ -11,16 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
 
-  <link rel="stylesheet" href="{{ site.github.url }}/assets/css/all.css">
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/assets/css/Source+Code+Pro.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-  <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+  <link rel="stylesheet" href="{{ '/assets/css/all.css' | relative_url }}">
+  <link rel="shortcut icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" />
 
-  <!-- Use Atom -->
   {% feed_meta %}
-
-  <!-- Use Jekyll SEO plugin -->
   {% seo %}
-
 </head>

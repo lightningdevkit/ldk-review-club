@@ -4,49 +4,28 @@ title: Meetings by Date
 permalink: /meetings/
 ---
 
-<div class="Home">
-  <h2 class="Home-posts-title">Meetings</h2>
-  <p>{% include linkers/meetings-pages.md %}</p>
+<h1 class="h-display h-display--lg">MEETINGS</h1>
+{% include redesign/meetings-nav.html %}
 
-  {% for post in site.posts %}
-    {% if post.layout != "pr" %}
-      {% continue %}
+{% for post in site.posts %}
+  {% if post.layout != "pr" %}
+    {% continue %}
+  {% endif %}
+
+  {% capture month_year %}{{ post.date | date: "%b %Y" | upcase }}{% endcapture %}
+
+  {% if month_year != lastmy %}
+    {% if lastmy != nil %}
+      </div>
+    </div>
     {% endif %}
-    {% capture components %}
-      {%- for comp in post.components -%}
-        <a href="/meetings-components/#{{comp}}">{{comp}}</a>{% unless forloop.last %}, {% endunless %}
-      {%- endfor -%}
-    {% endcapture %}
+    <div class="meetings-group" id="{{ post.date | date: '%b%Y' }}">
+      <div class="meetings-group__label">{{ month_year }}</div>
+      <div class="meeting-list">
+  {% endif %}
 
-    {% capture month_year %}{{ post.date | date: "%b %Y" }}{% endcapture %}
-
-    {% if month_year != lastmy %}
-      {% if lastmy != nil %}</table></div>{% endif %}
-      <div id="{{ post.date | date: "%b%Y" }}">
-        <h3 class="meetings-index-section">{{ month_year }}</h3>
-        <table style="padding-left: 1.5em;">
-    {% endif %}
-
-    {% assign lastmy = month_year %}
-
-    <tr class="Home-posts-post">
-      <td class="Home-posts-post-date">
-        {{ post.date | date_to_string }}
-      </td>
-      <td class="Home-posts-post-arrow">
-        &raquo;
-      </td>
-      <td>
-        <a class="Home-posts-post-title" href="{{ post.url }}">{% if post.pr %}#{{ post.pr }} {% endif %}{{ post.title }}</a>
-        ({{components}})
-        <span class="host">
-          hosted by
-          <a class="host" href="/meetings-hosts/#{{post.host}}">{{ post.host }}</a>
-        </span>
-      </td>
-    </tr>
-  {% endfor %}
-  </table>
+  {% include redesign/meeting-row.html post=post %}
+  {% assign lastmy = month_year %}
+{% endfor %}
   </div>
 </div>
-<br>

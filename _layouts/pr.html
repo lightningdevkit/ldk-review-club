@@ -1,69 +1,76 @@
 ---
 layout: default
+main_class: main--wide
 ---
 
 {% capture components %}
-  {%- for comp in page.components -%}
-    <a href="/meetings-components/#{{comp}}">{{comp}}</a>{% unless forloop.last %}, {% endunless %}
-  {%- endfor -%}
+{%- for comp in page.components -%}
+<a href="{{ '/meetings-components/#' | append: comp | relative_url }}" class="tag">{{ comp | downcase }}</a>
+{%- endfor -%}
 {% endcapture %}
 
 {% capture authors %}
-  {%- for author in page.authors -%}
-    <a class="author" href="/meetings-authors/#{{author}}">{{author}}</a>
-    <a href="https://github.com/{{ author }}"><i class="fa fa-github"></i></a>
-    {% unless forloop.last %}, {% endunless %}
-  {%- endfor -%}
+{%- for author in page.authors -%}
+<a href="https://github.com/{{ author }}">{{ author }}</a>{% unless forloop.last %}, {% endunless %}
+{%- endfor -%}
 {% endcapture %}
 
-<section>
-  <div class="post-content">
-    <h1>{{ page.title }} ({{components}})</h1>
+<a href="{{ '/meetings/' | relative_url }}" class="back-link"><span>←</span> ALL MEETINGS</a>
 
-    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">
-      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      {{ page.date | date: date_format }}
-      {% if page.status == "upcoming" %}
-        {{ site.meeting_time }}
-        in
-        {{ site.meeting_location }}.
-      {%- endif -%}
-    </time>
+<div class="tags" style="margin:0 0 20px">
+  {{ components }}
+</div>
 
-    {% if page.pr %}
-      <p style="font-weight:bold">
-        <a href="https://github.com/lightningdevkit/rust-lightning/pull/{{ page.pr }}">
-          https://github.com/lightningdevkit/rust-lightning/pull/{{ page.pr }}
-        </a>
-      </p>
-    {% elsif page.link %}
-      <p style="font-weight:bold">
-        <a href="{{ page.link }}">
-          {{ page.link }}
-        </a>
-      </p>
-    {% endif %}
+<h1 class="h-display h-display--md">
+  {% if page.pr %}#{{ page.pr }} {% endif %}{{ page.title | upcase }}
+</h1>
 
-    <p class="host">
-      Host:
-      <a class="host" href="/meetings-hosts/#{{ page.host }}">{{ page.host }}</a>
-      <a href="https://github.com/{{ page.host }}"><i class="fa fa-github"></i></a>
-    {% unless authors == empty %}
-      &nbsp;-&nbsp;
-      <span class="author">
-        PR author{% if page.authors.size > 1 %}s{% endif %}: {{authors}}
-      </span>
-    {%- endunless -%}
-    </p>
-
-    {% if page.status == "past" %}
-      {% if page.commit %}
-      <p><em>The PR branch HEAD was <a href="https://github.com/lightningdevkit/rust-lightning/tree/pr{{ page.id | remove_first: "/#" }}/">{{ page.commit }}</a> at the time of this review club meeting.</em><p>
-      {%- endif -%}
-    {%- endif -%}
-
-    <p>
-      {{ content }}
-    </p>
+<div class="meta-grid">
+  <div class="meta-grid__cell">
+    <div class="meta-grid__label">WHEN</div>
+    <div class="meta-grid__value">
+      {{ page.date | date: "%d %b %Y" }} · {{ site.meeting_time }}
+    </div>
   </div>
-</section>
+  <div class="meta-grid__cell">
+    <div class="meta-grid__label">WHERE</div>
+    <div class="meta-grid__value">#review-club on <a href="https://discord.gg/5AcknnMfBw">Discord</a></div>
+  </div>
+  <div class="meta-grid__cell">
+    <div class="meta-grid__label">HOST</div>
+    <div class="meta-grid__value">
+      <a href="https://github.com/{{ page.host }}">{{ page.host }}</a>
+    </div>
+  </div>
+  {% unless authors == empty %}
+  <div class="meta-grid__cell">
+    <div class="meta-grid__label">PR AUTHOR</div>
+    <div class="meta-grid__value">{{ authors }}</div>
+  </div>
+  {% endunless %}
+</div>
+
+{% if page.pr %}
+<a href="https://github.com/lightningdevkit/rust-lightning/pull/{{ page.pr }}" target="_blank" rel="noopener" class="btn" style="margin-top:24px">VIEW PR ON GITHUB <span>↗</span></a>
+{% elsif page.link %}
+<a href="{{ page.link }}" target="_blank" rel="noopener" class="btn" style="margin-top:24px">VIEW LINK <span>↗</span></a>
+{% endif %}
+
+{% if page.commit %}
+  {% if page.status == "past" or page.status == "done" %}
+<p class="note" style="margin-top:20px">
+  The PR branch HEAD was <a href="https://github.com/lightningdevkit/rust-lightning/tree/pr{{ page.id | remove_first: '/#' }}/">{{ page.commit }}</a> at the time of this review club meeting.
+</p>
+  {% endif %}
+{% endif %}
+
+<div class="post-content">
+  {{ content }}
+</div>
+
+{% if page.status == "upcoming" %}
+<div class="cta-banner">
+  <div class="cta-banner__text">Review the PR beforehand, then just show up — <strong style="color:#ECECF1">no need to ask to ask.</strong></div>
+  <a href="https://discord.gg/5AcknnMfBw" target="_blank" rel="noopener" class="btn btn--accent">JOIN THE MEETING <span>→</span></a>
+</div>
+{% endif %}

@@ -1,0 +1,61 @@
+---
+layout: default
+title: home
+---
+
+{% include redesign/hero.html %}
+
+<h1 class="h-display h-display--xl">OPEN CODE.<br>OPEN REVIEW.</h1>
+<p class="lead">A fortnightly club for reviewing Lightning Dev Kit (LDK) PRs — <strong style="color:#ECECF1">{{ site.meeting_time }} every second {{ site.meeting_day }}</strong> in {{ site.meeting_location }}.</p>
+
+<div class="btn-row">
+  <a href="https://discord.gg/5AcknnMfBw" target="_blank" rel="noopener" class="btn">JOIN THE DISCORD <span>→</span></a>
+  <a href="{{ '/your-first-meeting/' | relative_url }}" class="btn">YOUR FIRST MEETING <span>→</span></a>
+  <a href="{{ '/meetings/' | relative_url }}" class="btn">ALL MEETINGS <span>→</span></a>
+</div>
+
+<div class="info-grid">
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHAT IS THIS?</div>
+    <div class="info-grid__text">A fortnightly club for reviewing LDK PRs, together, in public.</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHAT'S IT FOR?</div>
+    <div class="info-grid__text">Helping newer contributors learn the LDK review process. It's <em>not</em> primarily intended to help open PRs get merged.</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHO SHOULD TAKE PART?</div>
+    <div class="info-grid__text">Anyone who wants to learn about contributing to LDK. All are welcome to come and ask questions!</div>
+  </div>
+  <div class="info-grid__cell">
+    <div class="info-grid__label">&gt; WHO RUNS THIS?</div>
+    <div class="info-grid__text">Meetings are scheduled by {{ site.coordinator }}. The meetings are hosted by a variety of LDK contributors.</div>
+  </div>
+</div>
+
+<h2 class="h-section">&gt; UPCOMING MEETING</h2>
+{% include redesign/upcoming-meeting.html %}
+
+<p class="note">We're always looking for interesting PRs and volunteer hosts — suggest a PR in the Discord channel, or read the <a href="{{ '/hosting/' | relative_url }}">information for meeting hosts</a> and contact {{ site.coordinator_irc }} on Discord.</p>
+
+<h2 class="h-section">&gt; RECENT MEETINGS</h2>
+<div class="meeting-list">
+{% assign count = 0 %}
+{% for post in site.posts %}
+  {% if post.status == "past" or post.status == "done" %}
+    {% assign count = count | plus: 1 %}
+    {% include redesign/meeting-row.html post=post %}
+  {% endif %}
+  {% if count == 4 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+</div>
+<a href="{{ '/meetings/' | relative_url }}" class="btn btn--ghost">SEE ALL MEETINGS <span>→</span></a>
+
+<h2 class="h-section">&gt; RESOURCES FOR NEW CONTRIBUTORS</h2>
+<div class="resource-list">
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Read the <a href="https://github.com/lightningdevkit/rust-lightning/blob/main/CONTRIBUTING.md">Contributing to LDK Guide</a> to understand the process and terminology used in LDK.</span></div>
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Look at the <a href="https://github.com/lightningdevkit/rust-lightning/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Good First Issues</a> and <a href="https://github.com/lightningdevkit/rust-lightning/issues?q=label%3A%22up+for+grabs%22">Up For Grabs</a> lists.</span></div>
+  <div class="resource-list__item"><span class="resource-list__mark">+</span><span>Brush up on your Rust — there are <a href="https://github.com/rust-unofficial/awesome-rust#resources">many references available</a> over and above <a href="https://doc.rust-lang.org/book/">The Book</a>.</span></div>
+</div>

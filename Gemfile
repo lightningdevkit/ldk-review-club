@@ -10,15 +10,13 @@ gem "jekyll-feed", "~> 0.12.1"
 gem "jekyll-seo-tag", "~> 2.6"
 gem "kramdown-parser-gfm"
 
-# Ruby make
-gem 'rake'
-
-# Testing
-gem 'minitest'
-gem 'minitest-reporters'
-gem 'color_pound_spec_reporter'
-
-# HTTP bindings to libcurl - https://github.com/taf2/curb
-gem 'curb'
-
 gem "webrick", "~> 1.7"
+
+group :test do
+  # Ruby make + test suite (not required for `jekyll serve`)
+  gem 'rake'
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'color_pound_spec_reporter'
+  gem 'curb'
+end
